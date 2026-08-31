@@ -1,0 +1,208 @@
+/* Simple 2-column bento layout. The wallet card and log card stack in the
+   left column, the dashboard mock takes the taller right column. */
+.preview-grid {
+  margin-top: 3.5rem;
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .preview-grid {
+    grid-template-columns: 1fr 1.3fr;
+    grid-template-rows: auto auto;
+  }
+
+  .preview-card-wallet {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .preview-card-log {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .preview-card-dashboard {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+}
+
+.preview-card {
+  padding: 1.75rem;
+}
+
+/* ---- Wallet card: icon gently floats up and down forever ---- */
+.preview-card-wallet {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.preview-icon {
+  display: flex;
+  height: 2.75rem;
+  width: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background-color: var(--color-raised);
+  color: var(--color-signal);
+  animation: drift 4s ease-in-out infinite;
+}
+
+.preview-title {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--color-ink2-hi);
+}
+
+.preview-text {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-ink2-mid);
+}
+
+/* ---- Dashboard mock ---- */
+.dashboard-mock-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard-mock-hi {
+  font-size: 0.75rem;
+  color: var(--color-ink2-low);
+}
+
+.dashboard-mock-name {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-ink2-hi);
+}
+
+.dashboard-mock-tag {
+  border-radius: 9999px;
+  border: 1px solid var(--color-line);
+  padding: 0.25rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--color-ink2-mid);
+}
+
+.dashboard-mock-stats {
+  margin-top: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.dashboard-stat {
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-line);
+  background-color: var(--color-raised);
+  padding: 0.75rem;
+  text-align: left;
+  /* each stat fades up on load, slightly staggered by nth-child */
+  opacity: 0;
+  animation: fade-up 0.5s ease forwards;
+}
+
+.dashboard-stat:nth-child(1) { animation-delay: 0.05s; }
+.dashboard-stat:nth-child(2) { animation-delay: 0.15s; }
+.dashboard-stat:nth-child(3) { animation-delay: 0.25s; }
+
+.dashboard-stat-value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-signal);
+}
+
+.dashboard-stat-label {
+  font-size: 0.6875rem;
+  color: var(--color-ink2-low);
+}
+
+/* Little bar chart. Each bar grows up from 0 to its height once, then the
+   two tallest bars keep a soft pulsing glow so the panel feels alive. */
+.dashboard-chart {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  height: 6rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-line);
+  background-color: var(--color-raised);
+  padding: 1rem;
+}
+
+.dashboard-chart-bar {
+  flex: 1;
+  height: var(--bar-height);
+  border-radius: 0.25rem 0.25rem 0 0;
+  background-color: var(--color-signal);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  animation: grow-bar 0.6s ease forwards;
+}
+
+@keyframes grow-bar {
+  to { transform: scaleY(1); }
+}
+
+/* ---- Resolution log ---- */
+.log-list {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.log-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-line);
+  background-color: var(--color-raised);
+  padding: 0.75rem 1rem;
+  opacity: 0;
+  animation: fade-up 0.5s ease forwards;
+}
+
+.log-name {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--color-ink2-hi);
+}
+
+.log-target {
+  margin-top: 0.125rem;
+  font-size: 0.6875rem;
+  color: var(--color-ink2-low);
+}
+
+.log-status {
+  border-radius: 9999px;
+  border: 1px solid var(--color-line);
+  padding: 0.25rem 0.625rem;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  white-space: nowrap;
+}
+
+.log-status-done {
+  border-color: rgba(var(--color-signal-rgb), 0.4);
+  color: var(--color-signal);
+}
+
+.log-status-pending {
+  border-color: rgba(var(--color-bridge-rgb), 0.4);
+  color: var(--color-bridge);
+  animation: blink 1.4s ease-in-out infinite;
+}

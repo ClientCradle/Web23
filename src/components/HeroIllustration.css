@@ -1,0 +1,63 @@
+/* Placeholder hero artwork — swap this for a real illustration/photo/video
+   later; the surrounding markup (HeroIllustration.jsx) can stay the same
+   shape (a card-sized box) if you replace the contents with an <img>. */
+.hero-illustration {
+  position: relative;
+  display: flex;
+  height: 20rem;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  border: 1px solid var(--color-line);
+  background-color: rgba(var(--color-panel-rgb), 0.4);
+}
+
+.hero-illustration-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(40px);
+  opacity: 0.55;
+}
+
+.hero-illustration-blob-a {
+  height: 14rem;
+  width: 14rem;
+  top: -3rem;
+  left: -3rem;
+  background-color: var(--color-signal);
+  animation: drift 7s ease-in-out infinite;
+}
+
+.hero-illustration-blob-b {
+  height: 12rem;
+  width: 12rem;
+  bottom: -3rem;
+  right: -2rem;
+  background-color: var(--color-bridge);
+  animation: drift 9s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.hero-illustration-icon {
+  position: relative;
+  display: flex;
+  height: 6rem;
+  width: 6rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid var(--color-line);
+  background-color: var(--color-panel);
+  color: var(--color-signal);
+}
+
+.hero-illustration-label {
+  position: absolute;
+  bottom: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink2-low);
+}

@@ -1,0 +1,17 @@
+<svg width="160" height="160" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Avatar for Aki Sato">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2BFFA0" />
+      <stop offset="100%" stop-color="#1FBE79" />
+    </linearGradient>
+    <clipPath id="clip"><circle cx="80" cy="80" r="80" /></clipPath>
+  </defs>
+  <g clip-path="url(#clip)">
+    <rect width="160" height="160" fill="#0F1B16" />
+    <rect width="160" height="160" fill="url(#g)" opacity="0.8" />
+    <circle cx="80" cy="20" r="55" fill="#ffffff" opacity="0.10" />
+    <circle cx="80" cy="150" r="60" fill="#000000" opacity="0.16" />
+  </g>
+  <circle cx="80" cy="80" r="79" fill="none" stroke="#2BFFA0" stroke-opacity="0.5" stroke-width="1.5" />
+  <text x="80" y="93" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="44" font-weight="600" fill="#EAF6EF" opacity="0.92">AS</text>
+</svg>

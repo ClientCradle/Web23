@@ -1,0 +1,44 @@
+.network-visual {
+  height: auto;
+  width: 100%;
+  max-width: 42rem;
+}
+
+@keyframes network-line-in {
+  from { opacity: 0; }
+  to { opacity: 0.35; }
+}
+
+@keyframes network-node-in {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.network-connector {
+  animation: network-line-in 1s ease forwards;
+  opacity: 0;
+}
+
+.network-center-node {
+  animation: network-node-in 0.5s ease forwards;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.network-bridge-line {
+  animation: network-line-in 0.8s ease 0.3s forwards;
+  opacity: 0;
+}
+
+.network-drift-node {
+  animation: drift ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}

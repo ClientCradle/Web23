@@ -1,0 +1,98 @@
+.feature-card {
+  position: relative;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.75rem;
+}
+
+.feature-card-badge {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(var(--color-bridge-rgb), 0.4);
+  padding: 0.125rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-bridge);
+}
+
+.feature-card-icon {
+  display: flex;
+  height: 2.75rem;
+  width: 2.75rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background-color: var(--color-raised);
+  color: var(--color-signal);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.feature-card:hover .feature-card-icon {
+  background-color: var(--color-signal);
+  color: var(--color-ink);
+}
+
+.feature-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.feature-card-title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-ink2-hi);
+}
+
+.feature-card-summary {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-ink2-mid);
+}
+
+.feature-card-detail {
+  border-top: 1px solid var(--color-line);
+  padding-top: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--color-ink2-low);
+}
+
+/* Large hero-style feature — bigger type, roomier padding, a soft glow */
+.feature-card-lg {
+  padding: 2.5rem;
+  justify-content: center;
+  background-image: var(--radial-glow);
+}
+
+.feature-card-lg .feature-card-icon {
+  height: 3.5rem;
+  width: 3.5rem;
+}
+
+.feature-card-lg .feature-card-title {
+  font-size: 1.5rem;
+}
+
+.feature-card-lg .feature-card-summary {
+  font-size: 1rem;
+}
+
+/* Wide feature — icon beside the text instead of above it */
+.feature-card-wide {
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.feature-card-wide .feature-card-icon {
+  margin-top: 0;
+}

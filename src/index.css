@@ -1,0 +1,480 @@
+/* ---------- Design tokens ---------- */
+/* Each color has a hex token (for solid fills/text/borders) and an "-rgb"
+   token (bare "r, g, b" channels, for rgba(var(--x-rgb), alpha) tints) so
+   translucent surfaces adapt with the theme instead of staying hardcoded. */
+
+/* Dark is the default theme (applies until a light theme is selected). */
+:root {
+  --color-ink: #08110d;
+  --color-ink-rgb: 8, 17, 13;
+  --color-panel: #0f1b16;
+  --color-panel-rgb: 15, 27, 22;
+  --color-raised: #142720;
+  --color-line: #1e332a;
+  --color-signal: #2bffa0;
+  --color-signal-rgb: 43, 255, 160;
+  --color-signal-dim: #1fbe79;
+  --color-bridge: #8b7cff;
+  --color-bridge-rgb: 139, 124, 255;
+  --color-bridge-dim: #6b5cdb;
+  --color-ink2-hi: #eaf6ef;
+  --color-ink2-mid: #9fc2b2;
+  --color-ink2-low: #5c7a6e;
+
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+
+  --grid-fade: linear-gradient(180deg, rgba(var(--color-signal-rgb), 0.08) 0%, rgba(var(--color-ink-rgb), 0) 60%);
+  --radial-glow: radial-gradient(60% 60% at 50% 0%, rgba(var(--color-bridge-rgb), 0.18) 0%, rgba(var(--color-ink-rgb), 0) 70%);
+}
+
+/* Light theme tokens — applied automatically when the system prefers light
+   and the user hasn't explicitly picked a theme, or explicitly via
+   [data-theme="light"] set by ThemeToggle. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --color-ink: #ffffff;
+    --color-ink-rgb: 255, 255, 255;
+    --color-panel: #f3f8f5;
+    --color-panel-rgb: 243, 248, 245;
+    --color-raised: #e6f0ea;
+    --color-line: #d5e3db;
+    --color-signal: #12a874;
+    --color-signal-rgb: 18, 168, 116;
+    --color-signal-dim: #0d8a5f;
+    --color-bridge: #6b5cdb;
+    --color-bridge-rgb: 107, 92, 219;
+    --color-bridge-dim: #5647b8;
+    --color-ink2-hi: #0b1f17;
+    --color-ink2-mid: #4c6a5c;
+    --color-ink2-low: #6c8577;
+  }
+}
+
+:root[data-theme="light"] {
+  --color-ink: #ffffff;
+  --color-ink-rgb: 255, 255, 255;
+  --color-panel: #f3f8f5;
+  --color-panel-rgb: 243, 248, 245;
+  --color-raised: #e6f0ea;
+  --color-line: #d5e3db;
+  --color-signal: #12a874;
+  --color-signal-rgb: 18, 168, 116;
+  --color-signal-dim: #0d8a5f;
+  --color-bridge: #6b5cdb;
+  --color-bridge-rgb: 107, 92, 219;
+  --color-bridge-dim: #5647b8;
+  --color-ink2-hi: #0b1f17;
+  --color-ink2-mid: #4c6a5c;
+  --color-ink2-low: #6c8577;
+}
+
+:root[data-theme="dark"] {
+  --color-ink: #08110d;
+  --color-ink-rgb: 8, 17, 13;
+  --color-panel: #0f1b16;
+  --color-panel-rgb: 15, 27, 22;
+  --color-raised: #142720;
+  --color-line: #1e332a;
+  --color-signal: #2bffa0;
+  --color-signal-rgb: 43, 255, 160;
+  --color-signal-dim: #1fbe79;
+  --color-bridge: #8b7cff;
+  --color-bridge-rgb: 139, 124, 255;
+  --color-bridge-dim: #6b5cdb;
+  --color-ink2-hi: #eaf6ef;
+  --color-ink2-mid: #9fc2b2;
+  --color-ink2-low: #5c7a6e;
+}
+
+/* Theme colors transition smoothly instead of snapping */
+body,
+.card,
+.btn-primary,
+.btn-secondary {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+/* ---------- Reset ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-ink);
+  color: var(--color-ink2-hi);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  /* Reveal animations slide content in from off-screen; keep that from
+     opening a horizontal scrollbar while it plays. */
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+::selection {
+  background: var(--color-signal);
+  color: var(--color-ink);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Shared building blocks (used across many pages) ---------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-signal);
+}
+
+/* Pill-shaped eyebrow badge, used in the hero */
+.eyebrow-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid var(--color-line);
+  background-color: rgba(var(--color-panel-rgb), 0.6);
+  padding: 0.4rem 0.9rem 0.4rem 0.6rem;
+}
+
+.eyebrow-badge-dot {
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 9999px;
+  background-color: var(--color-signal);
+}
+
+/* Small stat callout, used in a "by the numbers" strip */
+.stat-pill {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-radius: 1rem;
+  border: 1px solid var(--color-line);
+  background-color: rgba(var(--color-panel-rgb), 0.5);
+  padding: 1.25rem 1.5rem;
+}
+
+.stat-pill-value {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-ink2-hi);
+}
+
+.stat-pill-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-ink2-mid);
+}
+
+.container-page {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 72rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .container-page {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Use more of the screen on larger desktop monitors */
+@media (min-width: 1280px) {
+  .container-page {
+    max-width: 80rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container-page {
+    max-width: 90rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+/* Shadows are black in both themes (the normal choice for depth) — a
+   separate token from the ink colors, which flip between themes. */
+:root {
+  --shadow-color-rgb: 0, 0, 0;
+  --shadow-card: 0 1px 2px rgba(var(--shadow-color-rgb), 0.3), 0 16px 40px -20px rgba(var(--shadow-color-rgb), 0.5);
+  --shadow-card-hover: 0 1px 2px rgba(var(--shadow-color-rgb), 0.3), 0 24px 48px -16px rgba(var(--shadow-color-rgb), 0.55);
+}
+
+.card {
+  border-radius: 1.25rem;
+  border: 1px solid var(--color-line);
+  background-color: rgba(var(--color-panel-rgb), 0.6);
+  box-shadow: var(--shadow-card);
+}
+
+/* Opt-in: for cards that are clickable or meant to draw the eye */
+.card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: rgba(var(--color-signal-rgb), 0.4);
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  transition: transform 0.2s ease, filter 0.2s ease, color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--color-signal);
+  color: var(--color-ink);
+  border: 1px solid transparent;
+}
+
+.btn-primary:hover {
+  transform: scale(1.03);
+  filter: brightness(1.1);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  border: 1px solid var(--color-line);
+  color: var(--color-ink2-hi);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-signal);
+  color: var(--color-signal);
+}
+
+/* Hero section padding, shared by every page's top section */
+.section-hero {
+  position: relative;
+  padding: 9rem 0 4rem;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .section-hero {
+    padding-top: 11rem;
+  }
+}
+
+.section-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--radial-glow);
+}
+
+.section-grid-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 24rem;
+  pointer-events: none;
+  background-image: var(--grid-fade);
+}
+
+.section {
+  padding: 6rem 0;
+}
+
+.section-sm {
+  padding: 5rem 0;
+}
+
+/* A section with a tinted background and top/bottom dividers */
+.section-bordered {
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+  background-color: rgba(var(--color-panel-rgb), 0.3);
+}
+
+.section-border-top {
+  border-top: 1px solid var(--color-line);
+}
+
+/* Centered intro blurb used above a grid of cards */
+.section-header-center {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 36rem;
+  text-align: center;
+}
+
+/* Section heading + lead paragraph, used on most pages */
+.section-title {
+  margin-top: 0.75rem;
+  font-size: 1.875rem;
+  font-weight: 600;
+  color: var(--color-ink2-hi);
+}
+
+@media (min-width: 640px) {
+  .section-title {
+    font-size: 2.25rem;
+  }
+}
+
+.section-lead {
+  margin-top: 1rem;
+  color: var(--color-ink2-mid);
+}
+
+/* Page hero heading + lead paragraph, shared by every page except Home */
+.page-title {
+  margin-top: 0.75rem;
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: var(--color-ink2-hi);
+}
+
+@media (min-width: 640px) {
+  .page-title {
+    font-size: 3rem;
+  }
+}
+
+.page-title-narrow {
+  max-width: 42rem;
+}
+
+.page-lead {
+  margin-top: 1.25rem;
+  max-width: 36rem;
+  color: var(--color-ink2-mid);
+}
+
+/* Text column + illustration column, used by every page hero except Home */
+.hero-split {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .hero-split {
+    grid-template-columns: 1fr 0.9fr;
+    gap: 3.5rem;
+  }
+}
+
+/* ---------- Shared animations ---------- */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

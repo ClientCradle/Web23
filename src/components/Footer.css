@@ -1,0 +1,139 @@
+.footer {
+  border-top: 1px solid var(--color-line);
+  background-color: rgba(var(--color-panel-rgb), 0.4);
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+  padding: 4rem 0;
+}
+
+@media (min-width: 768px) {
+  .footer-top {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.footer-brand {
+  grid-column: span 2 / span 2;
+}
+
+.footer-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-logo {
+  display: block;
+  height: 1.75rem;
+  width: auto;
+}
+
+.footer-tagline {
+  margin-top: 1rem;
+  max-width: 20rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--color-ink2-mid);
+}
+
+.footer-subscribe {
+  margin-top: 1.5rem;
+  display: flex;
+  max-width: 24rem;
+  gap: 0.5rem;
+}
+
+.footer-subscribe-input {
+  width: 100%;
+  border-radius: 9999px;
+  border: 1px solid var(--color-line);
+  background-color: var(--color-ink);
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  color: var(--color-ink2-hi);
+}
+
+.footer-subscribe-input::placeholder {
+  color: var(--color-ink2-low);
+}
+
+.footer-subscribe-input:focus {
+  border-color: var(--color-signal);
+  outline: none;
+}
+
+.footer-subscribe-button {
+  flex-shrink: 0;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.footer-note {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--color-signal);
+}
+
+.footer-note-error {
+  color: #f87171;
+}
+
+.footer-column-title {
+  margin-bottom: 1rem;
+}
+
+.footer-column-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-column-link {
+  font-size: 0.875rem;
+  color: var(--color-ink2-mid);
+  transition: color 0.2s ease;
+}
+
+.footer-column-link:hover {
+  color: var(--color-signal);
+}
+
+.footer-bottom {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--color-line);
+  padding: 1.5rem 0;
+}
+
+@media (min-width: 640px) {
+  .footer-bottom {
+    flex-direction: row;
+  }
+}
+
+.footer-copyright {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-ink2-low);
+}
+
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 1.5rem;
+  font-size: 0.75rem;
+  color: var(--color-ink2-mid);
+}
+
+.footer-legal a:hover {
+  color: var(--color-signal);
+}

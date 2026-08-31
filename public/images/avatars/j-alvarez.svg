@@ -1,0 +1,16 @@
+<svg width="160" height="160" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Avatar for J. Alvarez">
+  <defs>
+    <radialGradient id="g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#2BFFA0" />
+      <stop offset="100%" stop-color="#8B7CFF" />
+    </radialGradient>
+    <clipPath id="clip"><circle cx="80" cy="80" r="80" /></clipPath>
+  </defs>
+  <g clip-path="url(#clip)">
+    <rect width="160" height="160" fill="#0F1B16" />
+    <rect width="160" height="160" fill="url(#g)" opacity="0.85" />
+    <circle cx="120" cy="120" r="55" fill="#000000" opacity="0.14" />
+  </g>
+  <circle cx="80" cy="80" r="79" fill="none" stroke="#2BFFA0" stroke-opacity="0.5" stroke-width="1.5" />
+  <text x="80" y="93" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="44" font-weight="600" fill="#EAF6EF" opacity="0.92">JA</text>
+</svg>

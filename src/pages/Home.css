@@ -1,0 +1,567 @@
+/* ---------- Hero ---------- */
+.hero-grid {
+  position: relative;
+  display: grid;
+  align-items: center;
+  gap: 3.5rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+}
+
+.hero-badge-row {
+  margin-bottom: 1.25rem;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-ink2-hi);
+}
+
+@media (min-width: 640px) {
+  .hero-title {
+    font-size: 3.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-title {
+    font-size: 4rem;
+  }
+}
+
+.hero-copy {
+  margin-top: 1.5rem;
+  max-width: 30rem;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--color-ink2-mid);
+}
+
+.hero-actions {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* the "visual product showcase" panel beside the hero copy */
+.hero-showcase {
+  position: relative;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.hero-showcase-visual {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  opacity: 0.9;
+}
+
+.final-cta-section {
+  padding: 3rem 0 7rem;
+}
+
+/* ---------- Shared section chrome ---------- */
+.section {
+  padding: 7rem 0;
+}
+
+.section-header-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .section-header-row {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+
+/* ---------- Feature showcase: asymmetric bento grid ---------- */
+.bento-grid {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.bento-2x2 {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.bento-2x1 {
+  grid-column: span 2;
+}
+
+@media (max-width: 1023px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bento-2x2 {
+    grid-row: span 1;
+  }
+}
+
+@media (max-width: 639px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  .bento-2x2,
+  .bento-2x1 {
+    grid-column: span 1;
+  }
+}
+
+/* ---------- Product benefits: mixed-size card grid ---------- */
+.benefits-grid {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 1023px) {
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.benefit-card {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.75rem;
+}
+
+.benefit-card-wide {
+  grid-column: span 2;
+}
+
+@media (max-width: 639px) {
+  .benefit-card-wide {
+    grid-column: span 1;
+  }
+}
+
+.benefit-icon {
+  display: flex;
+  height: 2.75rem;
+  width: 2.75rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: var(--color-raised);
+  color: var(--color-signal);
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.benefit-card:hover .benefit-icon {
+  transform: rotate(-10deg) scale(1.08);
+  background-color: var(--color-signal);
+  color: var(--color-ink);
+}
+
+/* Playing-card fan, desktop only. Odd cards lean left, even cards lean
+   right, and every card lifts flat and forward on hover. The rotation is
+   applied to the inner .benefit-card (not the Reveal wrapper), so it never
+   fights with Reveal's own fade-up animation on the same element. Mobile
+   and tablet keep the plain grid above so nothing is ever hard to read. */
+@media (min-width: 1024px) {
+  .benefits-grid {
+    perspective: 1200px;
+  }
+
+  .benefit-card {
+    transition: transform 0.35s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+
+  .benefits-grid > *:nth-child(odd) .benefit-card {
+    transform: rotate(-2deg) translateY(6px);
+  }
+
+  .benefits-grid > *:nth-child(even) .benefit-card {
+    transform: rotate(2deg) translateY(6px);
+  }
+
+  .benefits-grid > * .benefit-card:hover {
+    transform: rotate(0deg) translateY(-6px);
+    z-index: 2;
+  }
+}
+
+.benefit-title {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--color-ink2-hi);
+}
+
+.benefit-description {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-ink2-mid);
+}
+
+/* ---------- Roadmap preview ---------- */
+.roadmap-columns {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .roadmap-columns {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.roadmap-column {
+  height: 100%;
+  padding: 1.75rem;
+}
+
+.roadmap-list {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.roadmap-list-item {
+  border-left: 2px solid var(--color-line);
+  padding-left: 1rem;
+}
+
+.roadmap-item-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-ink2-hi);
+}
+
+.roadmap-item-description {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--color-ink2-mid);
+}
+
+/* ---------- Workflow ---------- */
+.workflow-grid {
+  margin-top: 4rem;
+  display: grid;
+  gap: 3rem;
+}
+
+@media (min-width: 1024px) {
+  .workflow-grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: center;
+  }
+}
+
+.workflow-steps {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.workflow-step {
+  position: relative;
+  display: flex;
+  gap: 1.25rem;
+}
+
+.workflow-step-marker {
+  position: relative;
+  display: flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid var(--color-line);
+  background-color: var(--color-panel);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--color-signal);
+}
+
+/* Soft glowing ring that pulses outward, so the marker feels active
+   instead of static. Pure CSS, no extra markup needed. */
+.workflow-step-marker::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  border: 1px solid rgba(var(--color-signal-rgb), 0.5);
+  animation: ring-pulse 2.4s ease-out infinite;
+}
+
+.workflow-step:nth-child(2) .workflow-step-marker::before { animation-delay: 0.3s; }
+.workflow-step:nth-child(3) .workflow-step-marker::before { animation-delay: 0.6s; }
+.workflow-step:nth-child(4) .workflow-step-marker::before { animation-delay: 0.9s; }
+
+@keyframes ring-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.workflow-step:not(:last-child) .workflow-step-marker::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  height: 2rem;
+  width: 1px;
+  background-color: var(--color-line);
+  transform: translateX(-50%);
+}
+
+.workflow-step-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-ink2-hi);
+}
+
+.workflow-step-description {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-ink2-mid);
+}
+
+.extension-cta {
+  margin-top: 2.5rem;
+  display: inline-flex;
+}
+
+/* ---------- Browser mockup (used in the workflow visual) ---------- */
+.browser-mockup {
+  overflow: hidden;
+}
+
+.browser-mockup-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--color-line);
+  background-color: var(--color-raised);
+  padding: 0.75rem 1rem;
+}
+
+.browser-mockup-dot {
+  height: 0.625rem;
+  width: 0.625rem;
+  border-radius: 9999px;
+}
+
+.browser-mockup-dot-red { background-color: rgba(248, 113, 113, 0.7); }
+.browser-mockup-dot-yellow { background-color: rgba(250, 204, 21, 0.7); }
+.browser-mockup-dot-green { background-color: rgba(74, 222, 128, 0.7); }
+
+.browser-mockup-url {
+  margin-left: 0.75rem;
+  flex: 1;
+  border-radius: 9999px;
+  background-color: var(--color-ink);
+  padding: 0.375rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-ink2-mid);
+}
+
+.browser-mockup-body {
+  position: relative;
+  height: 18rem;
+  background: linear-gradient(to bottom right, var(--color-panel), var(--color-ink));
+  padding: 1.75rem;
+  overflow: hidden;
+}
+
+/* A soft light sweeps down the mock screen on a loop, like a scan pass. */
+.browser-mockup-body::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--color-signal-rgb), 0) 0%,
+    rgba(var(--color-signal-rgb), 0.08) 50%,
+    rgba(var(--color-signal-rgb), 0) 100%
+  );
+  animation: scan-sweep 4s ease-in-out infinite;
+}
+
+@keyframes scan-sweep {
+  0% { top: -40%; }
+  100% { top: 100%; }
+}
+
+.browser-mockup-badge {
+  position: absolute;
+  right: 1.75rem;
+  top: 1.75rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(var(--color-signal-rgb), 0.4);
+  padding: 0.25rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--color-signal);
+  animation: fade-in 3s ease infinite alternate;
+}
+
+.browser-mockup-lines {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.browser-mockup-line {
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: var(--color-line);
+}
+
+.browser-mockup-line + .browser-mockup-line {
+  margin-top: 0.75rem;
+}
+
+.line-1 { width: 50%; }
+.line-2 { width: 75%; }
+.line-3 { width: 66%; }
+
+/* ---------- Trust & credibility ---------- */
+.stats-strip {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .stats-strip {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* These had no styles before — plain unstyled text. Now a proper pill,
+   with a small bounce-in and lift-on-hover so the numbers feel present. */
+.stat-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 1rem;
+  border: 1px solid var(--color-line);
+  background-color: rgba(var(--color-panel-rgb), 0.5);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.stat-pill:hover {
+  transform: translateY(-4px);
+  border-color: rgba(var(--color-signal-rgb), 0.4);
+}
+
+.stat-pill-value {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-signal);
+}
+
+.stat-pill-label {
+  font-size: 0.75rem;
+  color: var(--color-ink2-mid);
+}
+
+.testimonial-panel {
+  margin-top: 2.5rem;
+  padding: 3rem 2rem;
+}
+
+/* ---------- Final CTA ---------- */
+.final-cta {
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+/* The shared .section-glow sits behind the CTA text (see index.css) —
+   here it just breathes slowly so the card feels alive, not static. */
+.final-cta .section-glow {
+  animation: glow-breathe 5s ease-in-out infinite;
+}
+
+@keyframes glow-breathe {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
+@media (min-width: 640px) {
+  .final-cta {
+    padding: 5rem 3rem;
+  }
+}
+
+.final-cta-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-ink2-hi);
+}
+
+@media (min-width: 640px) {
+  .final-cta-title {
+    font-size: 2.75rem;
+  }
+}
+
+.final-cta-copy {
+  margin: 1rem auto 0;
+  max-width: 32rem;
+  color: var(--color-ink2-mid);
+}
+
+.final-cta-actions {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}

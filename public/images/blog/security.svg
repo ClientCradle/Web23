@@ -1,0 +1,20 @@
+<svg width="480" height="270" viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Security">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1FBE79" />
+      <stop offset="100%" stop-color="#6B5CDB" />
+    </linearGradient>
+  </defs>
+  <rect width="480" height="270" fill="#0F1B16" />
+  <rect width="480" height="270" fill="url(#g)" opacity="0.14" />
+  <circle cx="90" cy="220" r="110" fill="#1FBE79" opacity="0.12" />
+  <circle cx="400" cy="60" r="110" fill="#6B5CDB" opacity="0.12" />
+  <g opacity="0.3" stroke="#2BFFA0" stroke-width="1">
+    <path d="M120 60 h240 M120 90 h240 M120 210 h240 M120 180 h240" />
+  </g>
+  <circle cx="240" cy="115" r="42" fill="#0F1B16" stroke="#2BFFA0" stroke-width="1.5" />
+  <g transform="translate(223 97) scale(1.4)" stroke="#2BFFA0" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z" />
+  </g>
+  <text x="240" y="205" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" letter-spacing="3" fill="#9FC2B2">SECURITY</text>
+</svg>
