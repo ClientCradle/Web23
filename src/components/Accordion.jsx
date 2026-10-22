@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Accordion.css";
-
+// hiii
 export default function Accordion({ items }) {
   const [open, setOpen] = useState(0);
 
