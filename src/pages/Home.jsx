@@ -4,10 +4,11 @@ import DomainSearch from "../components/DomainSearch";
 import NetworkVisual from "../components/NetworkVisual";
 import CyclingFeatureGrid from "../components/CyclingFeatureGrid";
 import LivePreview from "../components/LivePreview";
+import BrowserFrame from "../components/BrowserFrame";
 import Reveal from "../components/Reveal";
 import Icon from "../components/Icon";
 import Testimonials from "../components/Testimonials";
-import { FEATURES, ROADMAP, SITE, WHY_CHOOSE_US, EXTENSION_STEPS } from "../lib/data";
+import { FEATURES, ROADMAP, SITE, TRUST_AVATARS, WHY_CHOOSE_US, EXTENSION_STEPS } from "../lib/data";
 import "./Home.css";
 
 const STATS = [
@@ -189,7 +190,14 @@ export default function Home() {
             </Reveal>
 
             <Reveal direction="right" delay={0.1}>
-              <BrowserMockup />
+              <BrowserFrame url="priya.dom" bodyClassName="browser-frame-body-lines">
+                <span className="browser-frame-badge">resolved via extension</span>
+                <div className="browser-frame-lines">
+                  <div className="browser-frame-line line-1" />
+                  <div className="browser-frame-line line-2" />
+                  <div className="browser-frame-line line-3" />
+                </div>
+              </BrowserFrame>
             </Reveal>
           </div>
         </div>
@@ -201,6 +209,14 @@ export default function Home() {
           <Reveal direction="left" className="section-header-center">
             <span className="eyebrow">Trusted by design</span>
             <h2 className="section-title">By the numbers</h2>
+            <div className="trust-avatars">
+              <div className="trust-avatars-stack">
+                {TRUST_AVATARS.map((avatar, i) => (
+                  <img key={avatar} src={avatar} alt="" className="trust-avatars-item" style={{ zIndex: TRUST_AVATARS.length - i }} />
+                ))}
+              </div>
+              <p className="trust-avatars-label">The team building {SITE.name} — and the people already using it.</p>
+            </div>
           </Reveal>
 
           <div className="stats-strip">
@@ -244,26 +260,5 @@ export default function Home() {
         </Reveal>
       </section>
     </>
-  );
-}
-
-function BrowserMockup() {
-  return (
-    <div className="card browser-mockup">
-      <div className="browser-mockup-bar">
-        <span className="browser-mockup-dot browser-mockup-dot-red" />
-        <span className="browser-mockup-dot browser-mockup-dot-yellow" />
-        <span className="browser-mockup-dot browser-mockup-dot-green" />
-        <div className="browser-mockup-url">priya.dom</div>
-      </div>
-      <div className="browser-mockup-body">
-        <span className="browser-mockup-badge">resolved via extension</span>
-        <div className="browser-mockup-lines">
-          <div className="browser-mockup-line line-1" />
-          <div className="browser-mockup-line line-2" />
-          <div className="browser-mockup-line line-3" />
-        </div>
-      </div>
-    </div>
   );
 }

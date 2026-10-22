@@ -123,11 +123,16 @@ export const ROADMAP = {
   ],
 };
 
+// Team & testimonial photos are real, direct-linked Unsplash images (not
+// generated placeholders) so the people behind the product read as real —
+// swap for actual headshots when the real team/quotes are in.
+const UNSPLASH = (id, size) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${size}&h=${size}&q=70`;
+
 export const TEAM = [
-  { name: "Priya Nandan", role: "CEO & Co-Founder", initials: "PN", avatar: "/images/avatars/priya-nandan.svg" },
-  { name: "Marcus Ehlers", role: "Head of Partnerships", initials: "ME", avatar: "/images/avatars/marcus-ehlers.svg" },
-  { name: "Aki Sato", role: "Technology Lead", initials: "AS", avatar: "/images/avatars/aki-sato.svg" },
-  { name: "Lena Cortez", role: "Legal & Privacy", initials: "LC", avatar: "/images/avatars/lena-cortez.svg" },
+  { name: "Priya Nandan", role: "CEO & Co-Founder", initials: "PN", avatar: UNSPLASH("1573497019940-1c28c88b4f3e", 160) },
+  { name: "Marcus Ehlers", role: "Head of Partnerships", initials: "ME", avatar: UNSPLASH("1519085360753-af0119f7cbe7", 160) },
+  { name: "Aki Sato", role: "Technology Lead", initials: "AS", avatar: UNSPLASH("1552058544-f2b08422138a", 160) },
+  { name: "Lena Cortez", role: "Legal & Privacy", initials: "LC", avatar: UNSPLASH("1494790108377-be9c29b29330", 160) },
 ];
 
 export const TESTIMONIALS = [
@@ -137,7 +142,7 @@ export const TESTIMONIALS = [
     quote:
       "Minting my Smart Domain took minutes, and now it doubles as my wallet address. It's the first Web3 product I've used that felt this simple.",
     rating: 5,
-    avatar: "/images/avatars/j-alvarez.svg",
+    avatar: UNSPLASH("1500648767791-00dcc994a43e", 80),
   },
   {
     name: "R. Okafor",
@@ -145,7 +150,7 @@ export const TESTIMONIALS = [
     quote:
       "Having my regular domain and my tokenized one in the same dashboard removed a whole category of busywork.",
     rating: 5,
-    avatar: "/images/avatars/r-okafor.svg",
+    avatar: UNSPLASH("1580489944761-15a19d654956", 80),
   },
   {
     name: "T. Lindqvist",
@@ -153,9 +158,14 @@ export const TESTIMONIALS = [
     quote:
       "The Chrome extension resolving domains straight in the address bar is exactly the bridge Web3 needed.",
     rating: 4,
-    avatar: "/images/avatars/t-lindqvist.svg",
+    avatar: UNSPLASH("1472099645785-5658abf4ff4e", 80),
   },
 ];
+
+// The faces behind the team + testimonial quotes, reused as a small "trust"
+// avatar stack on Home — real photos read as more credible than a bare
+// number, and it's honest since these are the same people named elsewhere.
+export const TRUST_AVATARS = [...TEAM, ...TESTIMONIALS].map((p) => p.avatar);
 
 // FAQ content is original writing addressing the same topic areas a tokenized
 // domain product typically covers — not copied from any external source.

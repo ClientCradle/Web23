@@ -26,6 +26,14 @@
   font-size: 1.25rem;
   line-height: 1.6;
   color: var(--color-ink2-hi);
+  /* Reserve room for 3 lines at all times (in em, so it scales with the
+     font-size change at the breakpoint below) — quotes vary in length, and
+     without this the carousel resized the page on every 5s rotation. */
+  min-height: 4.8em;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 @media (min-width: 640px) {

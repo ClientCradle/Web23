@@ -1,0 +1,34 @@
+/* Fixed, full-viewport, behind every route. Mounted once in App.jsx so the
+   same animation runs across the whole site instead of being redrawn per
+   page. Sits above the plain body background but below `.app` (see
+   App.css), and every card/panel already renders with a translucent
+   background, so this reads through them as a faint frosted-glass layer. */
+.global-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.global-background-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  opacity: 0.9;
+}
+
+/* Slight vignette so the animation stays quietest near the edges of the
+   viewport and never competes with page content for attention. */
+.global-background-fade {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 100% at 50% 0%, transparent 45%, var(--color-ink) 100%);
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .global-background-canvas {
+    opacity: 0.6;
+  }
+}

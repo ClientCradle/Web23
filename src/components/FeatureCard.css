@@ -50,12 +50,20 @@
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--color-ink2-hi);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .feature-card-summary {
   font-size: 0.875rem;
   line-height: 1.6;
   color: var(--color-ink2-mid);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .feature-card-detail {
@@ -64,6 +72,10 @@
   font-size: 0.75rem;
   line-height: 1.6;
   color: var(--color-ink2-low);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* Large hero-style feature — bigger type, roomier padding, a soft glow */

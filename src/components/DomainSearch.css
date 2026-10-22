@@ -6,51 +6,50 @@
   max-width: 28rem;
 }
 
-.domain-search-bar {
+/* ---- Omnibox (pill-shaped, like a real address bar) ---- */
+.domain-search-omnibox {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 1rem 1.25rem;
-  box-shadow: 0 0 60px -15px rgba(var(--color-signal-rgb), 0.25);
-}
-
-.domain-search-icon {
-  display: flex;
-  height: 2.25rem;
-  width: 2.25rem;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.5rem;
-  background-color: var(--color-raised);
-}
-
-.domain-search-spinner {
-  display: block;
-  height: 1rem;
-  width: 1rem;
   border-radius: 9999px;
-  border: 2px solid var(--color-signal);
-  border-top-color: transparent;
+  border: 1px solid var(--color-line);
+  background-color: rgba(var(--color-panel-rgb), 0.6);
+  padding: 0.875rem 1.1rem;
+  box-shadow: 0 0 60px -15px rgba(var(--color-signal-rgb), 0.25);
+  transition: border-color 0.3s ease;
 }
 
-.domain-search-spinner-spin {
-  animation: spin 1s linear infinite;
+.domain-search-omnibox-checking,
+.domain-search-omnibox-resolved {
+  border-color: rgba(var(--color-signal-rgb), 0.4);
 }
 
-.domain-search-value {
+.domain-search-omnibox-icon {
+  flex-shrink: 0;
+  color: var(--color-ink2-mid);
+  transition: color 0.3s ease;
+}
+
+.domain-search-omnibox-checking .domain-search-omnibox-icon,
+.domain-search-omnibox-resolved .domain-search-omnibox-icon {
+  color: var(--color-signal);
+}
+
+.domain-search-omnibox-value {
   display: flex;
   flex: 1;
+  min-width: 0;
   align-items: baseline;
   font-family: var(--font-mono);
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   color: var(--color-ink2-hi);
 }
 
 .domain-search-cursor {
   display: inline-block;
   margin: 0 1px;
-  height: 1.25rem;
+  height: 1.2rem;
   width: 2px;
   vertical-align: middle;
   background-color: var(--color-signal);
@@ -61,36 +60,207 @@
   color: var(--color-ink2-low);
 }
 
-.domain-search-pill {
-  white-space: nowrap;
+.domain-search-status {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-ink2-mid);
+  transition: color 0.3s ease;
+}
+
+.domain-search-omnibox-checking .domain-search-status,
+.domain-search-omnibox-resolved .domain-search-status {
+  color: var(--color-signal);
+}
+
+.domain-search-status-spinner {
+  display: block;
+  height: 0.75rem;
+  width: 0.75rem;
   border-radius: 9999px;
-  border: 1px solid var(--color-line);
-  padding: 0.25rem 0.75rem;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  animation: spin 0.8s linear infinite;
+}
+
+.domain-search-status-icon {
+  height: 0.75rem;
+  width: 0.75rem;
+  animation: domain-search-pop-in 0.3s ease;
+}
+
+@keyframes domain-search-pop-in {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ---- Result stack ----
+   The skeleton and the resolved profile occupy the same grid cell, so this
+   card never changes height as it swaps between them — nothing below it
+   (NetworkVisual) ever reflows. */
+.domain-search-result {
+  position: relative;
+  display: grid;
+  margin-top: 0.75rem;
+  padding: 0.9rem 1.1rem;
+  transition: border-color 0.3s ease;
+}
+
+.domain-search-result[data-stage="resolved"] {
+  border-color: rgba(var(--color-signal-rgb), 0.35);
+}
+
+.domain-search-skeleton,
+.domain-search-profile {
+  grid-area: 1 / 1;
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  min-width: 0;
+  transition: opacity 0.35s ease;
+}
+
+/* ---- Skeleton (typing + checking) ---- */
+.domain-search-skeleton-avatar,
+.domain-search-skeleton-line {
+  background-color: var(--color-raised);
+  background-image: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(var(--color-signal-rgb), 0.16) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  background-position: 150% 0;
+}
+
+.domain-search-skeleton-avatar {
+  height: 2.75rem;
+  width: 2.75rem;
+  flex-shrink: 0;
+  border-radius: 9999px;
+}
+
+.domain-search-skeleton-lines {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.domain-search-skeleton-line {
+  height: 0.625rem;
+  border-radius: 9999px;
+}
+
+.domain-search-skeleton-line-1 {
+  width: 55%;
+}
+
+.domain-search-skeleton-line-2 {
+  width: 35%;
+}
+
+.domain-search-result[data-stage="resolved"] .domain-search-skeleton {
+  opacity: 0;
+}
+
+.domain-search-result[data-stage="checking"] .domain-search-skeleton-avatar,
+.domain-search-result[data-stage="checking"] .domain-search-skeleton-line {
+  animation: domain-search-shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes domain-search-shimmer {
+  0% { background-position: 150% 0; }
+  100% { background-position: -50% 0; }
+}
+
+/* ---- Resolved profile ---- */
+.domain-search-profile {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.domain-search-result[data-stage="resolved"] .domain-search-profile {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.domain-search-profile-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.domain-search-profile-avatar {
+  display: block;
+  height: 2.75rem;
+  width: 2.75rem;
+  border-radius: 9999px;
+  object-fit: cover;
+  border: 2px solid var(--color-panel);
+}
+
+.domain-search-profile-badge {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  display: flex;
+  height: 1.125rem;
+  width: 1.125rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 2px solid var(--color-panel);
+  background-color: var(--color-signal);
+  color: var(--color-ink);
+}
+
+.domain-search-badge-icon {
+  height: 0.6rem;
+  width: 0.6rem;
+}
+
+.domain-search-profile-info {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.domain-search-profile-name {
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-ink2-hi);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.domain-search-profile-address {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   color: var(--color-ink2-mid);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.domain-search-pill-resolved {
-  border-color: rgba(var(--color-signal-rgb), 0.4);
-  color: var(--color-signal);
-}
-
-.domain-search-resolved {
-  margin-top: 0.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.75rem 1.25rem;
-  font-size: 0.875rem;
-  animation: fade-up 0.3s ease;
-}
-
-.domain-search-resolved-label {
-  color: var(--color-ink2-mid);
-}
-
-.domain-search-resolved-value {
+.domain-search-profile-chain {
+  flex-shrink: 0;
+  border-radius: 9999px;
+  border: 1px solid rgba(var(--color-bridge-rgb), 0.35);
+  background-color: rgba(var(--color-bridge-rgb), 0.12);
+  padding: 0.25rem 0.625rem;
   font-family: var(--font-mono);
-  color: var(--color-signal);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-bridge);
 }
